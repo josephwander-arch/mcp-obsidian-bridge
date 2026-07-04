@@ -1,6 +1,10 @@
 # mcp-obsidian-bridge
 
-Bridge local stdio MCP servers to Claude.ai and Claude mobile via Streamable HTTP + OAuth + ngrok.
+Permissioned HTTPS bridge for local MCP development and testing.
+
+## Safe Use / Permission Model
+
+AIWander tools are local, user-authorized MCP capability surfaces. They do not grant an AI new permissions by themselves. They expose tools the user explicitly installs and enables. Sensitive actions should be confirmed by the user, credentials should stay in the OS keyring or local vault, and demos should use mock data.
 
 ## What it does
 
@@ -44,13 +48,13 @@ npx mcp-obsidian-bridge start
 The bridge will:
 1. Spawn the Obsidian MCP server as a subprocess
 2. Start an HTTP server with OAuth and MCP endpoints
-3. Open an ngrok tunnel
+3. Open the configured HTTPS tunnel
 4. Print the public URL
 
 ### 3. Connect from Claude.ai
 
 1. Go to **Claude.ai → Settings → Integrations → Add custom connector**
-2. Enter the ngrok URL shown by the bridge
+2. Enter the HTTPS URL shown by the bridge
 3. When the authorization page opens, enter your PIN
 4. Done — Claude.ai can now access your Obsidian vault
 

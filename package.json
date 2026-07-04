@@ -1,7 +1,7 @@
 {
   "name": "mcp-obsidian-bridge",
   "version": "1.0.0",
-  "description": "Bridge local stdio MCP servers (like Obsidian) to Claude.ai via Streamable HTTP + OAuth + ngrok",
+  "description": "Permissioned HTTPS bridge for local MCP development and testing",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
