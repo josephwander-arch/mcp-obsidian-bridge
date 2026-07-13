@@ -1,4 +1,7 @@
-# mcp-obsidian-bridge
+# Universal stdio-to-HTTP MCP bridge template
+
+This repository is a generic permissioned bridge template. Obsidian is retained below as a
+worked example, not as the product name.
 
 Permissioned HTTPS bridge for local MCP development and testing.
 
