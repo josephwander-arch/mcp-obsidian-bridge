@@ -1,0 +1,48 @@
+# Build + test the bridge. Node 20 satisfies the package.json engines
+# constraint (>=18.0.0) and is the version the project is supported on.
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-test:
+    name: Build and test (Node 20)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npx tsc --noEmit
+
+      - name: Build
+        run: npm run build
+
+      # test-smoke.js drives the bridge against a stub stdio MCP server;
+      # test-integration.js drives it against the real filesystem MCP server
+      # fetched via npx, so this step needs network access.
+      - name: Test
+        run: npm test
